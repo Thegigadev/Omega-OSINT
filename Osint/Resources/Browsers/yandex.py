@@ -22,46 +22,46 @@ class Yandex:
             amount (int, optional): In the event you want to do more than one search on the specific query, this will output more URL's. Defaults to None.
 
         Returns:
-            string or list (if amount is specified): Returns a response text object which will be used in the filter function to scrape the URL's. In the event you use the amount parameter, this instead outputs a list of response text objects.
+            list: Returns URLs scraped from the search
         """
         async with aiohttp.ClientSession() as session:
             if amount is None:
                 async with session.get(f"https://yandex.com/search/?text={query}", headers=self.headers) as resp:
                     text = await resp.text()
-                    return text
+                    soup = BeautifulSoup(text, "html.parser")
+                    return [link.attrs['href'] for link in soup.find_all('a', class_='Link Link_theme_normal OrganicTitle-Link organic__url link', href=True)]
             else:
                 texts = []
+                links = []
                 for i in range(amount):
                     async with session.get(f"https://yandex.com/search/?text={query}&p={i}", headers=self.headers) as resp:
                         text = await resp.text()
                         texts.append(text)
-                return texts
+                for text in texts:
+                    soup = BeautifulSoup(text, "html.parser")
+                    a_tags = soup.find_all('a', class_='Link Link_theme_normal OrganicTitle-Link organic__url link', href=True)
+                    for link in a_tags:
+                        links.append(link.attrs['href'])
+                return links
 
 
-    async def filter(self, resp: str):
-        """Filters a response object so that only URL's for the specific search engine is listed
+    # async def filter(self, resp: str):
+    #     """Filters a response object so that only URL's for the specific search engine is listed
 
-        Args:
-            resp (str): Response text object from search
+    #     Args:
+    #         resp (str): Response text object from search
 
-        Returns:
-            list: Returns a list of URLs
-        """
-        soup = BeautifulSoup(resp, "html.parser")
-        return [link.attrs['href'] for link in soup.find_all('a', class_='Link Link_theme_normal OrganicTitle-Link organic__url link', href=True)]
+    #     Returns:
+    #         list: Returns a list of URLs
+    #     """
+    #     soup = BeautifulSoup(resp, "html.parser")
+    #     return [link.attrs['href'] for link in soup.find_all('a', class_='Link Link_theme_normal OrganicTitle-Link organic__url link', href=True)]
 
 
 # async def main():
 #     search = Yandex()
 #     resp = await search.search("site:'https://github.com' intext:'discord'", amount=5)
-#     urls = []
-#     for lists in resp:
-#         item = await search.filter(lists)
-#         urls.append(item)
-
-#     for url in urls:
-#         for item in url:
-#             print(item)
+#     print(resp)
 
 # if __name__ == '__main__':
 #     asyncio.run(main())
