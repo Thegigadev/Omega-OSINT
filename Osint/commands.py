@@ -17,10 +17,12 @@ class run:
             "exit": console.quit,
             "clear": console.clear,
             "cls": console.clear,
-            "ascii": console.ascii
+            "ascii": console.ascii,
+            "facebook": run.facebook,
+            "facebook api": run.facebook_account
         }
-        if command in options:
-            options[command]()
+        if command.lower() in options:
+            options[command.lower()]()
         else: 
             return
 
@@ -37,12 +39,14 @@ class run:
   [{coloring.WARNING}!{coloring.WHITE}] Commands: {coloring.BLUE}[command name]{coloring.WHITE}
   {coloring.BLUE}Name:          {coloring.BLUE}Description:
         
-  {coloring.WARNING}help        {coloring.WHITE}Creates specified number of GCs with tokens.
-  {coloring.WARNING}clear       {coloring.WHITE}Clears terminal of all print. Alias cls.
-  {coloring.WARNING}ascii       {coloring.WHITE}Prints terminal art.
-  {coloring.WARNING}exit        {coloring.WHITE}Terminates script.
-  {coloring.WARNING}twitter     {coloring.WHITE}Searches Twitter for keyword.
-  {coloring.WARNING}instagram   {coloring.WHITE}Searches Instagram for keyword.
+  {coloring.WARNING}help            {coloring.WHITE}Creates specified number of GCs with tokens.
+  {coloring.WARNING}clear           {coloring.WHITE}Clears terminal of all print. Alias cls.
+  {coloring.WARNING}ascii           {coloring.WHITE}Prints terminal art.
+  {coloring.WARNING}exit            {coloring.WHITE}Terminates script.
+  {coloring.WARNING}twitter         {coloring.WHITE}Searches Twitter for keyword.
+  {coloring.WARNING}instagram       {coloring.WHITE}Searches Instagram for keyword.
+  {coloring.WARNING}facebook        {coloring.WHITE}Searches Facebook for keyword.
+  {coloring.WARNING}facebook api    {coloring.WHITE}Searches Facebook for keyword using their API.
   --------------------------------------------------
         """)
 
@@ -53,6 +57,14 @@ class run:
     @social
     def instagram(query): 
         asyncio.run(Instagram().search(query))
+
+    @social
+    def facebook(query):
+        asyncio.run(Facebook().search(query))
+    
+    @social
+    def facebook_account(query):
+        asyncio.run(Facebook().search_account(query))
 ###################################################
 # seriously well done very swag
 # Me > you? cry about it ok go work on facebook osint

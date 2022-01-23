@@ -23,12 +23,14 @@ class Twitter:
         self.duck = DuckDuck()
 
     async def search(self, query: str):
-        urls = []
-        text = await self.google.search(f"site:'https://twitter.com' intitle:'{query}'")
-        urls.append(text)
-        text = await self.yandex.search(f"site:'https://twitter.com' intitle:'{query}'")
-        urls.append(text)
-        text = await self.duck.search(f"site:'https://twitter.com' intitle:'{query}'")
-        urls.append(text)
-        print(urls)
+        searches = await asyncio.gather(self.google.search(f"site:'https://twitter.com' intitle:'{query}'"), self.yandex.search(f"site:'https://twitter.com' intitle:'{query}'"), self.duck.search(f"site:'https://twitter.com' intitle:'{query}'"))
+        print(searches)
+        # urls = []
+        # text = await self.google.search(f"site:'https://twitter.com' intitle:'{query}'")
+        # urls.append(text)
+        # text = await self.yandex.search(f"site:'https://twitter.com' intitle:'{query}'")
+        # urls.append(text)
+        # text = await self.duck.search(f"site:'https://twitter.com' intitle:'{query}'")
+        # urls.append(text)
+        # print(urls)
 ###################################################

@@ -29,7 +29,7 @@ class Facebook:
             async with session.get(f"https://www.facebook.com/public/{query}?_fb_noscript=1") as resp:
                 text = await resp.text()
                 soup = BeautifulSoup(text, "html.parser")
-        return [url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)]
+        print([url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)])
 
     async def search(self, query: str):
         """Search using search engines, uses dorking
@@ -41,11 +41,13 @@ class Facebook:
             list: Returns urls in list of lists
         """
         urls = []
-        text = await self.google.search(f"site:'https://www.facebook.com' intitle:'{query}'")
-        urls.append(await self.google.filter(text))
-        text = await self.yandex.search(f"site:'https://www.facebook.com' intitle:'{query}'")
-        urls.append(await self.yandex.filter(text))
-        text = await self.duck.search(f"site:'https://www.facebook.com' intitle:'{query}'")
-        urls.append(await self.duck.filter(text))
+        searches = await asyncio.gather(self.google.search(f"site:'https://www.facebook.com' intitle:'{query}'"), self.yandex.search(f"site:'https://www.facebook.com' intitle:'{query}'"), self.duck.search(f"site:'https://www.facebook.com' intitle:'{query}'"))
+        print(searches)
+        # text = await self.google.search(f"site:'https://www.facebook.com' intitle:'{query}'")
+        # urls.append(text)
+        # text = await self.yandex.search(f"site:'https://www.facebook.com' intitle:'{query}'")
+        # urls.append(text)
+        # text = await self.duck.search(f"site:'https://www.facebook.com' intitle:'{query}'")
+        # urls.append(text)
         print(urls)
 ###################################################
