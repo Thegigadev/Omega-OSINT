@@ -26,43 +26,43 @@ class Google:
         async with aiohttp.ClientSession() as session:
             if amount is None:
                 async with session.get(f"https://www.google.com/search?q={query}",headers=self.headers) as resp:
-                    text = await resp.text()
-                    return text
+                    soup = BeautifulSoup(text, "html.parser")
+                    return [a_tags.find('a', href=True)['href'] for a_tags in soup.find_all('div', class_='yuRUbf')]
             else:
                 texts = []
+                links = []
                 start= 0
                 for i in range(amount+2):
                     async with session.get(f"https://www.google.com/search?q={query}&start={start}",headers=self.headers) as resp:
                         text = await resp.text()
                         texts.append(text)
                         start += 10
-                return texts
+                for text in texts:
+                    soup = BeautifulSoup(text, "html.parser")
+                    a_tags = soup.find_all('div', class_='yuRUbf')
+                    for link in a_tags:
+                        links.append(link.find('a', href=True)['href'])
+                return links
 
-    async def filter(self, resp: str):
-        """Filters a response object so that only URL's for the specific search engine is listed
+    # async def filter(self, resp: str):
+    #     """Filters a response object so that only URL's for the specific search engine is listed
 
-        Args:
-            resp (str): Response text object from search
+    #     Args:
+    #         resp (str): Response text object from search
 
-        Returns:
-            list: Returns a list of URLs
-        """
-        soup = BeautifulSoup(resp, "html.parser")
-        return [a_tags.find('a', href=True)['href'] for a_tags in soup.find_all('div', class_='yuRUbf')]
+    #     Returns:
+    #         list: Returns a list of URLs
+    #     """
+    #     soup = BeautifulSoup(resp, "html.parser")
+    #     return [a_tags.find('a', href=True)['href'] for a_tags in soup.find_all('div', class_='yuRUbf')]
 
 ###################################################
 # Dev Notes #
 ###################################################
 # async def main():
 #     search = Google()
-#     resp = await search.search(query="site:'https://replit.com' intext:'selfbot'", amount=5)
-#     urls = []
-#     for stuff in resp:
-#         text = await search.filter(stuff)
-#         urls.append(text)
-#     for lists in urls:
-#         for item in lists:
-#             print(item)
+#     resp = await search.search(query="site:'https://replit.com' intext:'selfbot'", amount=2)
+#     print(resp)
 
 
             
