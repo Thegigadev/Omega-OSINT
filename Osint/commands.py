@@ -4,8 +4,11 @@
 #`-'`-'`----'`----'  `'  `---'`-'`-'
 ###################################################
 import asyncio
+import os
 from .Resources import console, coloring
 from .Nodes import *
+if os.name == "nt":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 ###################################################
 class run:
     
