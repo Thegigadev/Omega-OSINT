@@ -26,6 +26,7 @@ class Google:
         async with aiohttp.ClientSession() as session:
             if amount is None:
                 async with session.get(f"https://www.google.com/search?q={query}",headers=self.headers) as resp:
+                    text = await resp.text()
                     soup = BeautifulSoup(text, "html.parser")
                     return [a_tags.find('a', href=True)['href'] for a_tags in soup.find_all('div', class_='yuRUbf')]
             else:

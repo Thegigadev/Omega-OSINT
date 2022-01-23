@@ -31,10 +31,6 @@ class Facebook:
                 soup = BeautifulSoup(text, "html.parser")
         return [url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)]
 
-    # async def filter(self, resp: str):
-    #     soup = BeautifulSoup(resp, "html.parser")
-    #     return [url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)]
-
     async def search(self, query: str):
         """Search using search engines, uses dorking
 

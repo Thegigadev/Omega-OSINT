@@ -25,10 +25,10 @@ class Instagram:
     async def search(self, query: str):
         urls = []
         text = await self.google.search(f"site:'https://www.instagram.com' intitle:'{query}'")
-        urls.append(await self.google.filter(text))
+        urls.append(text)
         text = await self.yandex.search(f"site:'https://www.instagram.com' intitle:'{query}'")
-        urls.append(await self.yandex.filter(text))
+        urls.append(text)
         text = await self.duck.search(f"site:'https://www.instagram.com' intitle:'{query}'")
-        urls.append(await self.duck.filter(text))
+        urls.append(text)
         print(urls)
 ###################################################
