@@ -1,10 +1,8 @@
 import aiohttp
 import asyncio
 from bs4 import BeautifulSoup
-from Browsers import *
-#I hate nigger
-#noooo omgeee
-# go to _init tell me if it works
+from Resources.Browsers import *
+
 class Instagram:
     def __init__(self):
         self.google = Google()

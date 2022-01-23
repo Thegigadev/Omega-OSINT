@@ -12,8 +12,8 @@
 ###################################################
 import sys
 sys.dont_write_bytecode = True
-import Omega
+import Osint
 ###################################################
 if __name__ == '__main__':
-  Omega.__start__.init()
+  Osint.__start__.init()
 ###################################################

@@ -16,7 +16,7 @@ class coloring:
 ###################################################
 class console:
   def __init__(self):
-    self.version = open("Omega/Resources/version.txt", "r").readline()
+    self.version = open("Resources/version.txt", "r").readline()
     self.devs = "Shell & Roover"
 
   def clear():

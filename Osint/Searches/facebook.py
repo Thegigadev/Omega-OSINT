@@ -1,5 +1,5 @@
 import sys
-from App import *
+from Resources.Browsers import *
 import asyncio
 import aiohttp
 from bs4 import BeautifulSoup
@@ -54,3 +54,5 @@ class Facebook:
         text = await self.duck.search(f"site:'https://www.facebook.com' intitle:'{query}'")
         urls.append(await self.duck.filter(text))
         return urls
+
+Facebook().search("test")
