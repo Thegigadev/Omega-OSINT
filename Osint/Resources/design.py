@@ -36,7 +36,7 @@ class console:
 ░╚════╝░╚═╝░░░░░╚═╝╚══════╝░╚═════╝░╚═╝░░╚═╝
     By: Roover & Shell @ Omega Development
     """
-    return art
+    print(art)
 
   def title():
     if os.name == "nt":

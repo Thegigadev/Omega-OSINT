@@ -4,7 +4,7 @@
 #`-'`-'`----'`----'  `'  `---'`-'`-'
 ###################################################
 import asyncio
-from .Resources import console
+from .Resources import console, coloring
 from .Nodes import *
 ###################################################
 class run:
@@ -27,8 +27,24 @@ class run:
     def social(media):
         def wrapper():
             query = media(input(f"\n  -> Enter {media.__name__} Query: "))
+            # Add \n to results
             return query
         return wrapper
+
+    def help():
+        print(f"""
+  {coloring.WHITE}-------------------------------------------------- 
+  [{coloring.WARNING}!{coloring.WHITE}] Commands: {coloring.BLUE}[command name]{coloring.WHITE}
+  {coloring.BLUE}Name:          {coloring.BLUE}Description:
+        
+  {coloring.WARNING}help        {coloring.WHITE}Creates specified number of GCs with tokens.
+  {coloring.WARNING}clear       {coloring.WHITE}Clears terminal of all print. Alias cls.
+  {coloring.WARNING}ascii       {coloring.WHITE}Prints terminal art.
+  {coloring.WARNING}exit        {coloring.WHITE}Terminates script.
+  {coloring.WARNING}twitter     {coloring.WHITE}Searches Twitter for keyword.
+  {coloring.WARNING}instagram   {coloring.WHITE}Searches Instagram for keyword.
+  --------------------------------------------------
+        """)
 
     @social
     def twitter(query):

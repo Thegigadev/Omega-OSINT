@@ -30,6 +30,5 @@ class Twitter:
         urls.append(await self.yandex.filter(text))
         text = await self.duck.search(f"site:'https://twitter.com' intitle:'{query}'")
         urls.append(await self.duck.filter(text))
-        for url in urls:
-            print(url)
+        print(urls)
 ###################################################

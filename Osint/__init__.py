@@ -4,6 +4,6 @@ from .Resources.design import console
 from .start import inp
 ###################################################
 console.title()
-print(console.ascii())
+console.ascii()
 __start__ = inp()
 ###################################################
