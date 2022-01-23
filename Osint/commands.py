@@ -46,6 +46,10 @@ class run:
     def checkpwn(query):
         asyncio.run(pwn.check(query))
 
+    @osint
+    def facebook_account(query):
+        asyncio.run(Facebook().search_account(query))
+
     def help():
         print(f"""
   {coloring.WHITE}-------------------------------------------------- 
@@ -60,22 +64,6 @@ class run:
   {coloring.WARNING}checkpwn    {coloring.WHITE}Check if email has been found in breaches.
   ---------------------------------------------------------------
         """)
-
-    @social
-    def twitter(query):
-        asyncio.run(Twitter().search(query))
-
-    @social
-    def instagram(query): 
-        asyncio.run(Instagram().search(query))
-
-    @social
-    def facebook(query):
-        asyncio.run(Facebook().search(query))
-    
-    @social
-    def facebook_account(query):
-        asyncio.run(Facebook().search_account(query))
 ###################################################
 # seriously well done very swag
 # Me > you? cry about it ok go work on facebook osint
