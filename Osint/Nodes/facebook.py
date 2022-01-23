@@ -10,20 +10,21 @@ import aiohttp
 from bs4 import BeautifulSoup
 ###################################################
 class Facebook:
+    """
+        Search Facebook for keyword using search engines and dorking.
+
+        Args:
+
+            Query (str): The keyword you wish to search.
+
+    """
     def __init__(self):
         self.google = Google()
         self.yandex = Yandex()
         self.duck = DuckDuck()
 
     async def search_account(self, query: str):
-        """Searches using facebooks requests to find accounts
 
-        Args:
-            query (str): Your search query, mostly someones name
-
-        Returns:
-            string: A response text object used in filter function  
-        """
         async with aiohttp.ClientSession() as session:
             async with session.get(f"https://www.facebook.com/public/{query}?_fb_noscript=1") as resp:
                 text = await resp.text()

@@ -9,20 +9,20 @@ import asyncio
 from ..Resources.Browsers import *
 ###################################################
 class Twitter:
+    """
+        Search Twitter for keyword using search engines and dorking.
+
+        Args:
+
+            Query (str): The keyword you wish to search.
+
+    """
     def __init__(self):
         self.google = Google()
         self.yandex = Yandex()
         self.duck = DuckDuck()
 
     async def search(self, query: str):
-        """Search using search engines, uses dorking
-
-		Args:
-			query (str): The name/account you want to search.
-
-		Returns:
-			list: Returns urls in list of urls.
-		"""
         urls = []
         text = await self.google.search(f"site:'https://twitter.com' intitle:'{query}'")
         urls.append(await self.google.filter(text))

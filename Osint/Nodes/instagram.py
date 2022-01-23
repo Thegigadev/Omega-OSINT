@@ -10,7 +10,7 @@ from ..Resources.Browsers import *
 ###################################################
 class Instagram:
     """
-        Search Instagram keyword using search engines and dorking.
+        Search Instagram for keyword using search engines and dorking.
 
         Args:
 

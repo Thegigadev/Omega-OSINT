@@ -41,7 +41,9 @@ class console:
   def title():
     if os.name == "nt":
       os.system(f"title OmegaOSINT")
-    else:
+    elif os.name == "linux":
       import subprocess
-      subprocess.check_output("Omega OSINT") 
+      subprocess.check_output("Omega OSINT")
+    else:
+      pass
 ###################################################
