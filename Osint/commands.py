@@ -14,6 +14,7 @@ class run:
             "help": run.help,
             "twitter": run.twitter,
             "instagram": run.instagram,
+            "checkpwn": run.checkpwn, 
             "exit": console.quit,
             "clear": console.clear,
             "cls": console.clear,
@@ -24,12 +25,24 @@ class run:
         else: 
             return
 
-    def social(media):
+    def osint(media):
         def wrapper():
-            query = media(input(f"\n  -> Enter {media.__name__} Query: "))
+            query = media(input(f"\n  -> Enter {media.__name__} query: "))
             # Add \n to results
             return query
         return wrapper
+
+    @osint
+    def twitter(query):
+        asyncio.run(Twitter().search(query))
+
+    @osint
+    def instagram(query): 
+        asyncio.run(Instagram().search(query))
+
+    @osint
+    def checkpwn(query):
+        asyncio.run(pwn.check(query))
 
     def help():
         print(f"""
@@ -43,16 +56,9 @@ class run:
   {coloring.WARNING}exit        {coloring.WHITE}Terminates script.
   {coloring.WARNING}twitter     {coloring.WHITE}Searches Twitter for keyword.
   {coloring.WARNING}instagram   {coloring.WHITE}Searches Instagram for keyword.
-  --------------------------------------------------
+  {coloring.WARNING}checkpwn    {coloring.WHITE}Check if email has been found in breaches.
+  ---------------------------------------------------------------
         """)
-
-    @social
-    def twitter(query):
-        asyncio.run(Twitter().search(query))
-
-    @social
-    def instagram(query): 
-        asyncio.run(Instagram().search(query))
 ###################################################
 # seriously well done very swag
 # Me > you? cry about it ok go work on facebook osint
