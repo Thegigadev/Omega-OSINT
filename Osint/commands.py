@@ -35,7 +35,7 @@ class run:
         return wrapper
 
     @osint
-    def twitter(query): # this is real
+    def twitter(query):
         asyncio.run(Twitter().search(query))
 
     @osint
