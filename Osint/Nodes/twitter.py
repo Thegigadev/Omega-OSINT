@@ -1,8 +1,13 @@
+###################################################
+#.---. .----..----..-..-..---..---. 
+#| |-< | || || || | \  / | |- | |-< 
+#`-'`-'`----'`----'  `'  `---'`-'`-'
+###################################################
 from bs4 import BeautifulSoup
 import aiohttp
 import asyncio
-from Resources.Browsers import *
-
+from ..Resources.Browsers import *
+###################################################
 class Twitter:
     def __init__(self):
         self.google = Google()
@@ -13,10 +18,10 @@ class Twitter:
         """Search using search engines, uses dorking
 
 		Args:
-			query (str): The name/account you want to search
+			query (str): The name/account you want to search.
 
 		Returns:
-			list: Returns urls in list of lists
+			list: Returns urls in list of urls.
 		"""
         urls = []
         text = await self.google.search(f"site:'https://twitter.com' intitle:'{query}'")
@@ -25,6 +30,6 @@ class Twitter:
         urls.append(await self.yandex.filter(text))
         text = await self.duck.search(f"site:'https://twitter.com' intitle:'{query}'")
         urls.append(await self.duck.filter(text))
-        print(urls)
-
-asyncio.run(Twitter().search("Roover"))
+        for url in urls:
+            print(url)
+###################################################

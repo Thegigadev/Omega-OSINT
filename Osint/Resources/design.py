@@ -18,6 +18,9 @@ class coloring:
 ###################################################
 class console:
 
+  def quit():
+    os._exit(1)
+
   def clear():
     os.system("cls" if os.name == "nt" else "clear")
     
@@ -37,7 +40,7 @@ class console:
 
   def title():
     if os.name == "nt":
-      os.system(f"title OmegaOSINT | {datetime.now()}")
+      os.system(f"title OmegaOSINT")
     else:
       import subprocess
       subprocess.check_output("Omega OSINT") 

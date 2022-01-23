@@ -1,8 +1,13 @@
+###################################################
+#.---. .----..----..-..-..---..---. 
+#| |-< | || || || | \  / | |- | |-< 
+#`-'`-'`----'`----'  `'  `---'`-'`-'
+###################################################
 import aiohttp
 import asyncio
 from bs4 import BeautifulSoup
-from .Resources.Browsers import *
-
+from ..Resources.Browsers import *
+###################################################
 class Instagram:
     def __init__(self):
         self.google = Google()
@@ -25,4 +30,5 @@ class Instagram:
         urls.append(await self.yandex.filter(text))
         text = await self.duck.search(f"site:'https://www.instagram.com' intitle:'{query}'")
         urls.append(await self.duck.filter(text))
-        return urls
+        return urls # Yes my bad it should print the url thats why its not working
+###################################################
