@@ -23,7 +23,7 @@ class Facebook:
         self.yandex = Yandex()
         self.duck = DuckDuck()
 
-    async def search_account(self, query: str):
+    async def search2(self, query: str):
 
         async with aiohttp.ClientSession() as session:
             async with session.get(f"https://www.facebook.com/public/{query}?_fb_noscript=1") as resp:
