@@ -3,7 +3,6 @@ import aiohttp
 import asyncio
 from Resources.Browsers import *
 
-
 class Twitter:
     def __init__(self):
         self.google = Google()
@@ -26,4 +25,6 @@ class Twitter:
         urls.append(await self.yandex.filter(text))
         text = await self.duck.search(f"site:'https://twitter.com' intitle:'{query}'")
         urls.append(await self.duck.filter(text))
-        return urls
+        print(urls)
+
+asyncio.run(Twitter().search("Roover"))

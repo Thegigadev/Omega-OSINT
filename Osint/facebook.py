@@ -55,4 +55,3 @@ class Facebook:
         urls.append(await self.duck.filter(text))
         return urls
 
-Facebook().search("test")

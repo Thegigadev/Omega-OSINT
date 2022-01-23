@@ -1,5 +1,4 @@
 ###################################################
-from .facebook import Facebook
-from .instagram import Instagram
-from .twitter import Twitter
+from .design import console, coloring
+from .Browsers import *
 ###################################################
