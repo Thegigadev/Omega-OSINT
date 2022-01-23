@@ -1,5 +1,5 @@
 import sys
-from Resources.Browsers import *
+from .Resources.Browsers import *
 import asyncio
 import aiohttp
 from bs4 import BeautifulSoup

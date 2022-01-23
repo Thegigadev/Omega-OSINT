@@ -1,7 +1,7 @@
 import aiohttp
 import asyncio
 from bs4 import BeautifulSoup
-from Resources.Browsers import *
+from .Resources.Browsers import *
 
 class Instagram:
     def __init__(self):
