@@ -1,7 +1,7 @@
 import aiohttp
 import asyncio
 from bs4 import BeautifulSoup
-from .Browsers import *
+from Browsers import *
 #I hate nigger
 #noooo omgeee
 # go to _init tell me if it works

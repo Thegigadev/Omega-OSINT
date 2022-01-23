@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import aiohttp
 import asyncio
-from .Browsers import *
+from Browsers import *
 
 
 class Twitter:
