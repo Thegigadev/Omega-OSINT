@@ -13,3 +13,6 @@ class inp:
   └─{coloring.HEADER}${coloring.WHITE}: """)
         run(command)
 ###################################################
+# Dev Notes #
+###################################################
+# File made by Roover.
