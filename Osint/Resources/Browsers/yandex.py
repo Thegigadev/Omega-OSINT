@@ -43,25 +43,7 @@ class Yandex:
                     for link in a_tags:
                         links.append(link.attrs['href'])
                 return links
-
-
-    # async def filter(self, resp: str):
-    #     """Filters a response object so that only URL's for the specific search engine is listed
-
-    #     Args:
-    #         resp (str): Response text object from search
-
-    #     Returns:
-    #         list: Returns a list of URLs
-    #     """
-    #     soup = BeautifulSoup(resp, "html.parser")
-    #     return [link.attrs['href'] for link in soup.find_all('a', class_='Link Link_theme_normal OrganicTitle-Link organic__url link', href=True)]
-
-
-# async def main():
-#     search = Yandex()
-#     resp = await search.search("site:'https://github.com' intext:'discord'", amount=5)
-#     print(resp)
-
-# if __name__ == '__main__':
-#     asyncio.run(main())
+###################################################
+# Dev Notes #
+###################################################
+# File made by Shell.
