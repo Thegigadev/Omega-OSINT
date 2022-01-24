@@ -54,26 +54,7 @@ class DuckDuck:
                     for link in soup.find_all('a', rel='nofollow', href=True):
                         links.append(link.attrs['href'])
                 return links
-
-
-
-    # async def filter(self, resp: str):
-    #     """Filters a response object so that only URL's for the specific search engine is listed
-
-    #     Args:
-    #         resp (str): Response text object from search
-
-    #     Returns:
-    #         list: Returns a list of URLs
-    #     """
-    #     soup = BeautifulSoup(resp, "html.parser")
-    #     return [link.attrs['href'] for link in soup.find_all('a', rel='nofollow', href=True)]
-
-    
-# async def main():
-#     search = DuckDuck()
-#     resp = await search.search("site:'https://replit.com' intext:'selfbot'", 1)
-#     print(resp)
-
-# if __name__ == '__main__':
-#     asyncio.run(main())
+###################################################
+# Dev Notes #
+###################################################
+# File made by Shell.
