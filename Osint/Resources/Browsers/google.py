@@ -44,30 +44,7 @@ class Google:
                     for link in a_tags:
                         links.append(link.find('a', href=True)['href'])
                 return links
-
-    # async def filter(self, resp: str):
-    #     """Filters a response object so that only URL's for the specific search engine is listed
-
-    #     Args:
-    #         resp (str): Response text object from search
-
-    #     Returns:
-    #         list: Returns a list of URLs
-    #     """
-    #     soup = BeautifulSoup(resp, "html.parser")
-    #     return [a_tags.find('a', href=True)['href'] for a_tags in soup.find_all('div', class_='yuRUbf')]
-
 ###################################################
 # Dev Notes #
 ###################################################
-# async def main():
-#     search = Google()
-#     resp = await search.search(query="site:'https://replit.com' intext:'selfbot'", amount=2)
-#     print(resp)
-
-
-            
-
-# if __name__ == '__main__':
-#     asyncio.run(main())
-###################################################
+# File made by Shell.
