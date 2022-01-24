@@ -32,7 +32,7 @@ class run:
             
     def osint(media):
         def wrapper():
-            query = media(input(f"\n  -> Enter {media.__name__} query: "))
+            query = media(input(f"{coloring.BLUE}\n  -> Enter {media.__name__} query: "))
             # Add \n to results
             return query
         return wrapper
@@ -74,6 +74,6 @@ class run:
   ---------------------------------------------------------------
         """)
 ###################################################
-# seriously well done very swag # K im gonna test now dont do anything stupid
-# Me > you? cry about it ok go work on facebook osint
-# no u skid :rage:
+# Dev Notes #
+###################################################
+# File made by Roover.
