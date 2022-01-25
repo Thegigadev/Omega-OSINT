@@ -1,3 +1,3 @@
-#Omega-Osint
+# Omega-Osint
 
--- omg reedme
+omg reedme
