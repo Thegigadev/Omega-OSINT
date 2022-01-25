@@ -13,9 +13,6 @@ class Instagram:
 	"""
 		Search Instagram for keyword using search engines and dorking.
 
-		Args:
-
-			Query (str): The keyword you wish to search.
 
 	"""
 	
@@ -25,6 +22,11 @@ class Instagram:
 		self.duck = DuckDuck()
 
 	async def search(self, query: str):
+		"""Searches using dorking methods on search engines
+
+		Args:
+			query (str): The query which you wish to search for
+		"""
 		gathered = await asyncio.gather(self.google.search(f"site:'https://instagram.com' intitle:'{query}'"), self.yandex.search(f"site:'https://instagram.com' intitle:'{query}'"), self.duck.search(f"site:'https://instagram.com' intitle:'{query}'") )
 		# found = await self.google.search(f"site:'https://instagram.com' intitle:'{query}'")
 		# for i in found:

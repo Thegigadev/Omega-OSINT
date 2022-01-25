@@ -11,13 +11,14 @@ class pwn:
 	"""
 		Search HaveIBeenPwned database for email to find if it's been pwned!
 
-		Args:
-
-			Query (str): The email you wish to search.
-
 	"""
 	
-	async def check(query):
+	async def check(query: str):
+		"""Checks if your email/query has been pwned
+
+		Args:
+			query (str): Your email/query
+		"""
 		account = query.replace("@", "%40")
 		async with aiohttp.ClientSession() as session:
 			z = await session.get(f"https://haveibeenpwned.com/", headers={"x-requested-with": "XMLHttprequest", "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Brave Chrome/91.0.4472.124 Safari/537.36"})

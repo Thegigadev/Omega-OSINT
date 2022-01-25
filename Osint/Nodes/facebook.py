@@ -14,9 +14,6 @@ class Facebook:
 	"""
 		Search Facebook for keyword using search engines and dorking.
 
-		Args:
-
-			Query (str): The keyword you wish to search.
 
 	"""
 	
@@ -26,6 +23,11 @@ class Facebook:
 		self.duck = DuckDuck()
 
 	async def search2(self, query: str):
+		"""Uses facebooks own API to search
+
+		Args:
+			query (str): The query which you wish to search for
+		"""
 
 		async with aiohttp.ClientSession() as session:
 			async with session.get(f"https://www.facebook.com/public/{query}?_fb_noscript=1") as resp:
@@ -34,6 +36,11 @@ class Facebook:
 		print([url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)])
 
 	async def search(self, query: str):
+		"""Searches using dorking methods on search engines
+
+		Args:
+			query (str): The query which you wish to search for
+		"""
 		gathered = await asyncio.gather(self.google.search(f"site:'https://facebook.com' intitle:'{query}'"), self.yandex.search(f"site:'https://facebook.com' intitle:'{query}'"), self.duck.search(f"site:'https://facebook.com' intitle:'{query}'"))
 			# searches = []
 			# found = await self.google.search(f"site:'https://facebook.com' intitle:'{query}'")
