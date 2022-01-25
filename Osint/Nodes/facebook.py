@@ -25,13 +25,13 @@ class Facebook:
 		self.yandex = Yandex()
 		self.duck = DuckDuck()
 
-	"""async def search2(self, query: str):
+	async def search2(self, query: str):
 
 		async with aiohttp.ClientSession() as session:
 			async with session.get(f"https://www.facebook.com/public/{query}?_fb_noscript=1") as resp:
 				text = await resp.text()
 				soup = BeautifulSoup(text, "html.parser")
-		print([url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)])"""
+		print([url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)])
 
 	async def search(self, query: str):
 		searches = []
