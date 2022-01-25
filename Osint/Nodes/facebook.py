@@ -34,18 +34,20 @@ class Facebook:
 		print([url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)])
 
 	async def search(self, query: str):
-		searches = []
-		found = await self.google.search(f"site:'https://facebook.com' intitle:'{query}'")
-		for i in found:
-			searches.append(i)
-		found = await self.yandex.search(f"site:'https://facebook.com' intitle:'{query}'")
-		for i in found:
-			searches.append(i)
-		found = await self.duck.search(f"site:'https://facebook.com' intitle:'{query}'")
-		for i in found: 
-			searches.append(i)
-		for search in searches:
-			print(f"{coloring.FAIL}  -> Link found: {search}")
+		gathered = await asyncio.gather(self.google.search(f"site:'https://facebook.com' intitle:'{query}'"), self.yandex.search(f"site:'https://facebook.com' intitle:'{query}'"), self.duck.search(f"site:'https://facebook.com' intitle:'{query}'"))
+			# searches = []
+			# found = await self.google.search(f"site:'https://facebook.com' intitle:'{query}'")
+			# for i in found:
+			# 	searches.append(i)
+			# found = await self.yandex.search(f"site:'https://facebook.com' intitle:'{query}'")
+			# for i in found:
+			# 	searches.append(i)
+			# found = await self.duck.search(f"site:'https://facebook.com' intitle:'{query}'")
+			# for i in found: 
+			# 	searches.append(i)
+		for searches in gathered:
+			for search in searches:
+				print(f"{coloring.FAIL}  -> Link found: {search}")
 ###################################################
 # Dev Notes #
 ###################################################

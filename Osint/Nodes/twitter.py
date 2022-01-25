@@ -25,18 +25,20 @@ class Twitter:
 		self.duck = DuckDuck()
 
 	async def search(self, query: str):
-		searches = []
-		found = await self.google.search(f"site:'https://twitter.com' intitle:'{query}'")
-		for i in found:
-			searches.append(i)
-		found = await self.yandex.search(f"site:'https://twitter.com' intitle:'{query}'")
-		for i in found:
-			searches.append(i)
-		found = await self.duck.search(f"site:'https://twitter.com' intitle:'{query}'")
-		for i in found: 
-			searches.append(i)
-		for search in searches:
-			print(f"{coloring.FAIL}  -> Link found: {search}")
+		gathered = await asyncio.gather(self.google.search(f"site:'https://twitter.com' intitle:'{query}'"), self.yandex.search(f"site:'https://twitter.com' intitle:'{query}'"), self.duck.search(f"site:'https://twitter.com' intitle:'{query}'"))
+		# searches = []
+		# found = await self.google.search(f"site:'https://twitter.com' intitle:'{query}'")
+		# for i in found:
+		# 	searches.append(i)
+		# found = await self.yandex.search(f"site:'https://twitter.com' intitle:'{query}'")
+		# for i in found:
+		# 	searches.append(i)
+		# found = await self.duck.search(f"site:'https://twitter.com' intitle:'{query}'")
+		# for i in found: 
+		# 	searches.append(i)
+		for searches in gathered:
+			for search in searches:
+				print(f"{coloring.FAIL}  -> Link found: {search}")
 ###################################################
 # Dev Notes #
 ###################################################
