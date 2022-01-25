@@ -21,13 +21,14 @@ class Instagram:
 		self.yandex = Yandex()
 		self.duck = DuckDuck()
 
-	async def search(self, query: str):
+	async def search(self, query: str, amount: int =None):
 		"""Searches using dorking methods on search engines
 
 		Args:
 			query (str): The query which you wish to search for
+			amount (int): The amount of times each search should be done
 		"""
-		gathered = await asyncio.gather(self.google.search(f"site:'https://instagram.com' intitle:'{query}'"), self.yandex.search(f"site:'https://instagram.com' intitle:'{query}'"), self.duck.search(f"site:'https://instagram.com' intitle:'{query}'") )
+		gathered = await asyncio.gather(self.google.search(f"site:'https://instagram.com' intitle:'{query}'", amount), self.yandex.search(f"site:'https://instagram.com' intitle:'{query}'", amount), self.duck.search(f"site:'https://instagram.com' intitle:'{query}'", amount) )
 		# found = await self.google.search(f"site:'https://instagram.com' intitle:'{query}'")
 		# for i in found:
 		# 	searches.append(i)

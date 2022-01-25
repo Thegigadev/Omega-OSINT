@@ -67,7 +67,7 @@ class Shodan:
                         data['protocol_versions'].append(item.text)
                     elif "ssl.version" in item.attrs['href']:
                         data['tls_version'].append(item.text)
-                print(f"{coloring.FAIL}COUNTRIES: {data['countries']}\nPORTS: {data['ports']}\nORGANIZATIONS: {data['orgs']}\nVULNERABILITIES: {data['vulns']}\nPRODUCTS: {data['products']}\nTAGS: {data['tags']}\nOPERATING SYSTEMS: {data['os']}\nPROTOCOL VERSIONS: {data['protocol_versions']}\nTLS/SSL VERSIONS: {data['tls_version']}\nDISCLAIMER: These results listed are most popular")
+                print(f"{coloring.FAIL}COUNTRIES: {data['countries']}\nPORTS: {data['ports']}\nORGANIZATIONS: {data['orgs']}\nVULNERABILITIES: {data['vulns']}\nPRODUCTS: {data['products']}\nTAGS: {data['tags']}\nOPERATING SYSTEMS: {data['os']}\nPROTOCOL VERSIONS: {data['protocol_versions']}\nTLS/SSL VERSIONS: {data['tls_version']}\nDISCLAIMER: These results listed are most popular results, not all results.")
 # i leave this to all powaful roovevr von roover to become pro front end dev and make it "clean"
        
                 

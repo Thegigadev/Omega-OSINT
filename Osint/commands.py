@@ -6,7 +6,9 @@
 import asyncio
 import os
 from .Resources import console, coloring
+from .Resources.Browsers import *
 from .Nodes import *
+import inspect
 if os.name == "nt":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 ###################################################
@@ -25,7 +27,7 @@ class run:
             "facebook": run.facebook,
             "facebookapi": run.facebookapi,
             "shodan": run.shodan,
-            "shodanreport": run.shodan_report
+            "shodanreport": run.shodanreport
         }
         if command.lower() in options:
             options[command.lower()]()
@@ -34,18 +36,25 @@ class run:
             
     def osint(media):
         def wrapper():
-            query = media(input(f"{coloring.BLUE}\n  -> Enter {media.__name__} query: "))
+            if "i" in inspect.signature(media).parameters:
+                query = str(input(f"{coloring.BLUE}\n  -> Enter {media.__name__} query: "))
+                amount = int(input(f"{coloring.BLUE}\n  -> Enter amount of searches: "))
+                media(query, amount)
+                return query, amount
+            else:
+                query = str(input(f"{coloring.BLUE}\n  -> Enter {media.__name__} query: "))
+                media(query)
+                return query
             # Add \n to results
-            return query
         return wrapper
 
     @osint
-    def twitter(query):
-        asyncio.run(Twitter().search(query))
+    def twitter(query, i:int = None):
+        asyncio.run(Twitter().search(query, i))
 
     @osint
-    def instagram(query): 
-        asyncio.run(Instagram().search(query))
+    def instagram(query, i:int=None): 
+        asyncio.run(Instagram().search(query, i))
 
     @osint
     def checkpwn(query):
@@ -56,16 +65,17 @@ class run:
         asyncio.run(Facebook().search2(query))
 
     @osint
-    def facebook(query):
-        asyncio.run(Facebook().search(query))
+    def facebook(query, i:int=None):
+        asyncio.run(Facebook().search(query, i))
     
     @osint
     def shodan(query):
         asyncio.run(Shodan().search(query))
 
     @osint
-    def shodan_report(query):
+    def shodanreport(query):
         asyncio.run(Shodan().report(query))
+
 
     def help():
         print(f"""

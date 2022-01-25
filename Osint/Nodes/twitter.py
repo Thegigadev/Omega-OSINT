@@ -21,14 +21,15 @@ class Twitter:
 		self.yandex = Yandex()
 		self.duck = DuckDuck()
 
-	async def search(self, query: str):
+	async def search(self, query: str, amount:int = None):
 		"""Searches using dorking methods using search engines
 
 
 		Args:
+			amount (int, Optional): The amount of times each search should be done
 			query (str): The query which you wish to search for
 		"""
-		gathered = await asyncio.gather(self.google.search(f"site:'https://twitter.com' intitle:'{query}'"), self.yandex.search(f"site:'https://twitter.com' intitle:'{query}'"), self.duck.search(f"site:'https://twitter.com' intitle:'{query}'"))
+		gathered = await asyncio.gather(self.google.search(f"site:'https://twitter.com' intitle:'{query}'", amount), self.yandex.search(f"site:'https://twitter.com' intitle:'{query}'", amount), self.duck.search(f"site:'https://twitter.com' intitle:'{query}'", amount))
 		# searches = []
 		# found = await self.google.search(f"site:'https://twitter.com' intitle:'{query}'")
 		# for i in found:

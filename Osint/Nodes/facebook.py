@@ -35,13 +35,14 @@ class Facebook:
 				soup = BeautifulSoup(text, "html.parser")
 		print([url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)])
 
-	async def search(self, query: str):
+	async def search(self, query: str, amount: int = None):
 		"""Searches using dorking methods on search engines
 
 		Args:
+			amount (int): The amount of times each search should be done
 			query (str): The query which you wish to search for
 		"""
-		gathered = await asyncio.gather(self.google.search(f"site:'https://facebook.com' intitle:'{query}'"), self.yandex.search(f"site:'https://facebook.com' intitle:'{query}'"), self.duck.search(f"site:'https://facebook.com' intitle:'{query}'"))
+		gathered = await asyncio.gather(self.google.search(f"site:'https://facebook.com' intitle:'{query}'", amount), self.yandex.search(f"site:'https://facebook.com' intitle:'{query}'", amount), self.duck.search(f"site:'https://facebook.com' intitle:'{query}'", amount))
 			# searches = []
 			# found = await self.google.search(f"site:'https://facebook.com' intitle:'{query}'")
 			# for i in found:
