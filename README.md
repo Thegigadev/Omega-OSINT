@@ -1,0 +1,3 @@
+# Omega-Osint
+
+omg reedme
