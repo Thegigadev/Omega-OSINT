@@ -19,7 +19,7 @@ class run:
             "help": run.help,
             "twitter": run.twitter,
             "instagram": run.instagram,
-            "checkpwn": run.checkpwn, 
+            "checkpwnemail": run.checkpwnemail, 
             "exit": console.quit,
             "clear": console.clear,
             "cls": console.clear,
@@ -27,7 +27,10 @@ class run:
             "facebook": run.facebook,
             "facebookapi": run.facebookapi,
             "shodan": run.shodan,
-            "shodanreport": run.shodanreport
+            "shodanreport": run.shodanreport,
+            "google": run.google,
+            "duckduck": run.duckduck,
+            "checkpwnpass": run.checkpwnpass
         }
         if command.lower() in options:
             options[command.lower()]()
@@ -57,8 +60,12 @@ class run:
         asyncio.run(Instagram().search(query, i))
 
     @osint
-    def checkpwn(query):
-        asyncio.run(pwn.check(query))
+    def checkpwnemail(query):
+        asyncio.run(pwn.check_email(query))
+
+    @osint
+    def checkpwnpass(query):
+        asyncio.run(pwn.check_pass(query))
 
     @osint
     def facebookapi(query):
@@ -76,6 +83,19 @@ class run:
     def shodanreport(query):
         asyncio.run(Shodan().report(query))
 
+    @osint
+    def google(query, i:int=None):
+        resp = asyncio.run(Google().search(query, i))
+        for url in resp:
+            print(url)
+        
+    
+    @osint
+    def duckduck(query, i=None):
+        resp = asyncio.run(DuckDuck().search(query, i))
+        for url in resp:
+            print(url)
+
 
     def help():
         print(f"""
@@ -90,11 +110,12 @@ class run:
   {coloring.WARNING}facebook            {coloring.WHITE}Check if email has been found in breaches.
   {coloring.WARNING}instagram           {coloring.WHITE}Searches Facebook for keyword
   {coloring.WARNING}facebookapi         {coloring.WHITE}Searches Facebook for keyword using their API.
-  {coloring.WARNING}checkpwn            {coloring.WHITE}Check if email has been found in breaches.
+  {coloring.WARNING}checkpwnemail       {coloring.WHITE}Check if email has been found in breaches.
+  {coloring.WARNING}checkpwnpass      {coloring.WHITE}Check if password has been found in breaches.
   {coloring.WARNING}shodan              {coloring.WHITE}Searches shodan for keyword
   {coloring.WARNING}shodanreport        {coloring.WHITE}Searches shodan reports for keyword
-
-
+  {coloring.WARNING}google              {coloring.WHITE}Searches google with specific search
+  {coloring.WARNING}duckduck            {coloring.WHITE}Searches duckduckgo with specific search
   ---------------------------------------------------------------
         """)
 ###################################################

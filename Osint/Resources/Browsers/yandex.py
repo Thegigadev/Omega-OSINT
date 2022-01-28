@@ -33,7 +33,7 @@ class Yandex:
             else:
                 texts = []
                 links = []
-                for i in range(amount):
+                for i in range(amount+2):
                     async with session.get(f"https://yandex.com/search/?text={query}&p={i}", headers=self.headers) as resp:
                         text = await resp.text()
                         texts.append(text)
