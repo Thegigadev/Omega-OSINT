@@ -30,6 +30,7 @@ class run:
             "shodanreport": run.shodanreport,
             "google": run.google,
             "duckduck": run.duckduck,
+            "imagesearch": run.imagesearch,
             "checkpwnpass": run.checkpwnpass
         }
         if command.lower() in options:
@@ -39,15 +40,20 @@ class run:
             
     def osint(media):
         def wrapper():
-            if "i" in inspect.signature(media).parameters:
+            if "query" and "i" in inspect.signature(media).parameters:
                 query = str(input(f"{coloring.BLUE}\n  -> Enter {media.__name__} query: "))
                 amount = int(input(f"{coloring.BLUE}\n  -> Enter amount of searches: "))
                 media(query, amount)
                 return query, amount
-            else:
+            if "query" in inspect.signature(media).parameters:
                 query = str(input(f"{coloring.BLUE}\n  -> Enter {media.__name__} query: "))
                 media(query)
                 return query
+            if "path" in inspect.signature(media).parameters:
+                path = str(input(f"{coloring.BLUE}\n  -> Drag image you want to reverse search: "))
+                media(path)
+                return path
+            
             # Add \n to results
         return wrapper
 
@@ -87,14 +93,23 @@ class run:
     def google(query, i:int=None):
         resp = asyncio.run(Google().search(query, i))
         for url in resp:
-            print(url)
+            print(f"{coloring.FAIL}  -> Link found: {url}")
         
     
     @osint
     def duckduck(query, i=None):
         resp = asyncio.run(DuckDuck().search(query, i))
         for url in resp:
-            print(url)
+            print(f"{coloring.FAIL}  -> Link found: {url}")
+        
+    @osint
+    def imagesearch(path):
+        if "'" in path:
+            path = path.replace("'", "")
+        resp = asyncio.run(Yandex().image_search(path))
+        for url in resp:
+            print(f"{coloring.FAIL}  -> Link found: {url}")
+
 
 
     def help():
@@ -111,11 +126,12 @@ class run:
   {coloring.WARNING}instagram           {coloring.WHITE}Searches Facebook for keyword
   {coloring.WARNING}facebookapi         {coloring.WHITE}Searches Facebook for keyword using their API.
   {coloring.WARNING}checkpwnemail       {coloring.WHITE}Check if email has been found in breaches.
-  {coloring.WARNING}checkpwnpass      {coloring.WHITE}Check if password has been found in breaches.
+  {coloring.WARNING}checkpwnpass        {coloring.WHITE}Check if password has been found in breaches.
   {coloring.WARNING}shodan              {coloring.WHITE}Searches shodan for keyword
   {coloring.WARNING}shodanreport        {coloring.WHITE}Searches shodan reports for keyword
   {coloring.WARNING}google              {coloring.WHITE}Searches google with specific search
   {coloring.WARNING}duckduck            {coloring.WHITE}Searches duckduckgo with specific search
+  {coloring.WARNING}imagesearch         {coloring.WHITE}Searches yandex with image search
   ---------------------------------------------------------------
         """)
 ###################################################
