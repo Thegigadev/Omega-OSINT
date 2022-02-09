@@ -1,3 +1,2 @@
 # Omega-Osint
-
-omg reedme
+I hackeed your mom
