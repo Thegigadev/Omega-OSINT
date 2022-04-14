@@ -38,9 +38,10 @@ class Instagram:
 		# found = await self.duck.search(f"site:'https://instagram.com' intitle:'{query}'")
 		# for i in found: 
 		# 	searches.append(i)
-		for urls in gathered:
-			for url in urls:
-				print(f"{coloring.FAIL}  -> Link found: {url}")
+		# for urls in gathered:
+		# 	for url in urls:
+		# 		print(f"{coloring.FAIL}  -> Link found: {url}")
+		return gathered
 ###################################################
 # Dev Notes #
 ###################################################

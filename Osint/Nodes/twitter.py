@@ -40,9 +40,10 @@ class Twitter:
 		# found = await self.duck.search(f"site:'https://twitter.com' intitle:'{query}'")
 		# for i in found: 
 		# 	searches.append(i)
-		for searches in gathered:
-			for search in searches:
-				print(f"{coloring.FAIL}  -> Link found: {search}")
+		return gathered
+		# for searches in gathered:
+		# 	for search in searches:
+		# 		print(f"{coloring.FAIL}  -> Link found: {search}")
 ###################################################
 # Dev Notes #
 ###################################################

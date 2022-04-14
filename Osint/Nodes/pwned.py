@@ -29,8 +29,9 @@ class pwn:
 				print(f"{coloring.WHITE}  -> Email not found in haveibeenpwned database.")
 			elif x.status == 200:
 				z = await x.json()
-				for name in z['Breaches']:
-					print(f"{coloring.FAIL}  -> Breach found: {name['Name']}")
+				return z['Breaches']
+				# for name in z['Breaches']:
+				# 	print(f"{coloring.FAIL}  -> Breach found: {name['Name']}")
 
 	async def check_pass(query: str):
 		async with aiohttp.ClientSession() as session:
@@ -41,9 +42,8 @@ class pwn:
 				text = await x.text()
 				soup = BeautifulSoup(text, "html.parser")
 				result = soup.find('div', class_="row pwnResultBanner")
-				print(result)
 				title = result.find('div', class_="pwnTitle")
-				print(title.text)
+				return title.text
 			else:
 				print("Couldn't do req")
 

@@ -33,7 +33,7 @@ class Facebook:
 			async with session.get(f"https://www.facebook.com/public/{query}?_fb_noscript=1") as resp:
 				text = await resp.text()
 				soup = BeautifulSoup(text, "html.parser")
-		print([url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)])
+		return [url.attrs['href'] for url in soup.find_all('a', class_="_32mo", href=True)]
 
 	async def search(self, query: str, amount: int = None):
 		"""Searches using dorking methods on search engines
@@ -53,9 +53,10 @@ class Facebook:
 			# found = await self.duck.search(f"site:'https://facebook.com' intitle:'{query}'")
 			# for i in found: 
 			# 	searches.append(i)
-		for searches in gathered:
-			for search in searches:
-				print(f"{coloring.FAIL}  -> Link found: {search}")
+		# for searches in gathered:
+		# 	for search in searches:
+		# 		print(f"{coloring.FAIL}  -> Link found: {search}")
+		return gathered
 ###################################################
 # Dev Notes #
 ###################################################

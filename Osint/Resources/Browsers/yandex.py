@@ -58,10 +58,12 @@ class Yandex:
                     async with session.get(f"https://yandex.com/images/search?rpt=imageview&url={url}&cbir_id={shard}/{id}", headers=self.headers) as resp:
                         text = await resp.text()
                         soup = BeautifulSoup(text, "html.parser")
-                        return [link.attrs['href'] for link in soup.find_all('a', class_='Link Link_theme_outer CbirSites-ItemDomain CbirSites-ItemDomain_withFavicon', href=True)]
-                else:
-                    text = await resp.text()
-                    print(text)
+                        info = [link.attrs['href'] for link in soup.find_all('a', class_='Link Link_theme_outer CbirSites-ItemDomain CbirSites-ItemDomain_withFavicon', href=True)]
+                #     async with session.get(f"https://yandex.com/images/search?rpt=imageview&url={url}&cbir_id={shard}/{id}&cbir_page=similar", headers=self.headers)as resp:
+                        
+                # else:
+                #     text = await resp.text()
+                #     print(text)
                 
 ###################################################
 # Dev Notes #

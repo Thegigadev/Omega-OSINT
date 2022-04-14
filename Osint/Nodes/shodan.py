@@ -23,8 +23,9 @@ class Shodan:
                 for url in soup.find_all('a', class_='title text-dark', href=True):
                     link = f"https://shodan.io{url.attrs['href']}"
                     urls.append(link)
-            for url in urls:
-                print(f"{coloring.FAIL}  -> Link found: {url}") # i realise i can  one line this
+            # for url in urls:
+            #     print(f"{coloring.FAIL}  -> Link found: {url}") # i realise i can  one line this
+            return urls
 
     async def report(self, query: str):
         """An overall report for the specific query
@@ -67,7 +68,7 @@ class Shodan:
                         data['protocol_versions'].append(item.text)
                     elif "ssl.version" in item.attrs['href']:
                         data['tls_version'].append(item.text)
-                print(f"{coloring.FAIL}COUNTRIES: {data['countries']}\nPORTS: {data['ports']}\nORGANIZATIONS: {data['orgs']}\nVULNERABILITIES: {data['vulns']}\nPRODUCTS: {data['products']}\nTAGS: {data['tags']}\nOPERATING SYSTEMS: {data['os']}\nPROTOCOL VERSIONS: {data['protocol_versions']}\nTLS/SSL VERSIONS: {data['tls_version']}\nDISCLAIMER: These results listed are most popular results, not all results.")
+                return f"COUNTRIES: {data['countries']}\nPORTS: {data['ports']}\nORGANIZATIONS: {data['orgs']}\nVULNERABILITIES: {data['vulns']}\nPRODUCTS: {data['products']}\nTAGS: {data['tags']}\nOPERATING SYSTEMS: {data['os']}\nPROTOCOL VERSIONS: {data['protocol_versions']}\nTLS/SSL VERSIONS: {data['tls_version']}\nDISCLAIMER: These results listed are most popular results, not all results."
 # i leave this to all powaful roovevr von roover to become pro front end dev and make it "clean"
        
                 
@@ -78,9 +79,9 @@ class Shodan:
 
 
 
-async def main():
-    shodan = Shodan()
-    test = await shodan.report("Servers")
+# async def main():
+#     shodan = Shodan()
+#     test = await shodan.report("Servers")
 
-if __name__ == '__main__':
-    asyncio.run(main())
+# if __name__ == '__main__':
+#     asyncio.run(main())
